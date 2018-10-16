@@ -22,7 +22,13 @@
 </template>
 
 <script>
-import * as NPC from "./NPC";
+function l(msg) {
+  console.log(
+    `%c ${msg}`,
+    "background: #222; color: #bada55; font-size: 1.4rem;"
+  );
+}
+import * as ML from "./ML";
 export default {
   data() {
     return {
@@ -52,13 +58,13 @@ export default {
           this.gameOver = true;
           this.winTotals.d++;
         }
-        if (!this.isTraining) {
-          this.checkChances();
-        }
+        this.checkProbability();
       }
     },
-    checkChances() {
-      this.ratios = NPC.checkChances(this.grid, this.turn);
+    checkProbability() {
+      if (!this.isTraining) {
+        this.ratios = ML.checkProbability(this.grid, this.turn);
+      }
     },
     reset() {
       this.grid = Array.apply(null, Array(9)).map(
@@ -68,7 +74,7 @@ export default {
       this.gameOver = false;
       this.turn = "x";
       this.turnCount = 0;
-      this.checkChances();
+      this.checkProbability();
     },
     hasWon() {
       const test = /^xxx|ooo$/;
@@ -89,10 +95,11 @@ export default {
     }
   },
   mounted() {
-    console.log("Started training");
-    NPC.startTraining().then(() => {
-      console.log("Finished Training!");
+    l("Started training");
+    ML.startTraining().then(() => {
+      l("Finished Training!");
       this.isTraining = false;
+      this.checkProbability();
     });
     this.reset();
   }

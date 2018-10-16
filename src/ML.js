@@ -1,6 +1,7 @@
 import { NeuralNetwork } from "brain.js";
 // @ts-ignore
 import DataSet from "./dataset.json";
+
 const engine = new NeuralNetwork();
 
 function map(data, player) {
@@ -16,17 +17,11 @@ function map(data, player) {
   });
 }
 
-export function startTraining(iterations = 20000) {
+export function startTraining(iterations = 500) {
   return engine.trainAsync(DataSet, { iterations });
 }
 
-export function predict(data, player) {
-  const mapped = map(data, player);
-
-  return engine.run(mapped);
-}
-
-export function checkChances(data, player) {
+export function checkProbability(data, player) {
   return data
     .map((_, i) => {
       const board = data.slice();
@@ -34,5 +29,5 @@ export function checkChances(data, player) {
       return engine.run(map(board, player));
     })
     .flat()
-    .map(i => i.toFixed(4));
+    .map(i => i.toFixed(3));
 }
