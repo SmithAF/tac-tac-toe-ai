@@ -1,21 +1,7 @@
-# brain-vue
+# Tic Tac Toe AI
 
-## Project setup
-```
-npm install
-```
+A game I wrote to start experimenting with machine learning
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Live App
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
+https://smithaf.github.io/tac-tac-toe-ai/
