@@ -1,4 +1,4 @@
 module.exports = {
   outputDir: "docs",
-  baseUrl: "/tac-tac-toe-ai"
+  baseUrl: "/tic-tac-toe-ai"
 };
